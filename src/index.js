@@ -2,6 +2,8 @@ import express from 'express';
 import routes from './routes.js';
 import handlebars from 'express-handlebars';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import { authMiddleware } from './middlewares/authMiddleware.js';
 
 const app = express();
 
@@ -29,8 +31,12 @@ app.set('views', './src/views');
 
 // Add static middleware
 app.use(express.static('src/public'));
+//Add cookie parser
+app.use(cookieParser());
 // Add body parser
 app.use(express.urlencoded({extended:false}));
+//Add authMidleware
+app.use(authMiddleware);
 // Add routes
 app.use(routes);
 
