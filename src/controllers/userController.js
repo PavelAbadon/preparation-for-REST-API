@@ -5,7 +5,7 @@ import { isAuth, isGuest } from "../middlewares/authMiddleware.js";
 const userController = Router();
 
 userController.get('/register', isGuest, (req, res) => {
-    res.render('users/register');
+    res.render('users/register', {pageTitle: 'register'});
 });
 
 userController.post('/register', isGuest, async(req, res) =>{
@@ -17,7 +17,7 @@ userController.post('/register', isGuest, async(req, res) =>{
 });
 
 userController.get('/login', isGuest, (req, res) => {
-    res.render('users/login');
+    res.render('users/login', {pageTitle: 'login'});
 });
 
 userController.post('/login', isGuest, async (req, res) =>{
