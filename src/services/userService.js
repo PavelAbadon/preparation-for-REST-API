@@ -3,11 +3,14 @@ import bcrypt from "bcrypt";
 import { generateAuthToken } from "../utils/tokenUtils.js";
 
 
-export async function register (email, password){
+export async function register (email, password, rePassword){
     const user = await User.findOne({email});
     if(user){
         throw new Error('User with this email already exists');
-    }   
+    }
+    if(password !== rePassword)   {
+        throw new Error('Password must match');
+    }
     const newUser = await User.create({email, password});
     const token = generateAuthToken(newUser);
     return token;

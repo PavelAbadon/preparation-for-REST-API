@@ -1,6 +1,7 @@
 import e, { Router } from "express";
 import { userService } from "../services/index.js";
 import { isAuth, isGuest } from "../middlewares/authMiddleware.js";
+import { getErrorMessage } from "../utils/errorUtils.js";
 
 const userController = Router();
 
@@ -10,10 +11,20 @@ userController.get('/register', isGuest, (req, res) => {
 
 userController.post('/register', isGuest, async(req, res) =>{
     const {email, password, rePassword} = req.body;
-    const token = await userService.register( email, password, rePassword );
-    res.cookie('auth', token);
 
-    res.redirect('/');
+    try {
+        const token = await userService.register( email, password, rePassword );
+        res.cookie('auth', token);
+        res.redirect('/');
+
+    } catch (err) {
+        res.render('users/register', {
+            error: getErrorMessage(err),
+            user: { email }
+        });
+
+    }   
+    
 });
 
 userController.get('/login', isGuest, (req, res) => {
