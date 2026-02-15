@@ -24,4 +24,11 @@ animalController.post('/create', isAuth, async (req, res) => {
     }
 });
 
+animalController.get('/', async(req, res) => {
+    const animals = await animalService.getAllAnimals();
+
+    res.render('animals', { animals, pageTitle: 'Dashboard'});
+
+})
+
 export default animalController;
