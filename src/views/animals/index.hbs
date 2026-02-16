@@ -16,13 +16,16 @@
                         <p><strong>Need of:</strong><span class="need-of">{{need}}</span></p>
                         <a class="details-btn" href="#">Details</a>
                     </li>
+                    {{else}}
+                    <div id="no-post">
+                        <h2>There are no animals in need now! </h2>
+                    </div>
                     {{/each}}
                     
                 </ul>
 
                 <!-- Display an h2 if there are no posts -->
-                <!-- <div id="no-post">
-                    <h2>There are no animals in need now! </h2>
-                </div> -->
+                
+
             </section>
        
