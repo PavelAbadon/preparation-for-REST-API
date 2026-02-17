@@ -31,14 +31,17 @@
                         </table>
                         <p>Description: <span id="details-description">{{animal.description}}</span></p>
                     </div>
-
+                    {{#if isAuthenticated}}
                     <!--Edit and Delete are only for creator-->
+                    {{#if isOwner}}
                     <div id="action-buttons">
                         <a href="#" id="edit-btn">Edit</a>
                         <a href="#" id="delete-btn">Delete</a>
-                        <a href="#" id="donation-btn">Donation</a>
-                        <p id="already-donated">You already donated!</p>
+                    {{/if}}
+                        <!--<a href="#" id="donation-btn">Donation</a>
+                        <p id="already-donated">You already donated!</p>-->
                     </div>
+                    {{/if}}
                 </div>
             </section>
         </main>

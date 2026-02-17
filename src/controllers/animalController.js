@@ -33,9 +33,11 @@ animalController.get('/', async(req, res) => {
 
 animalController.get('/:id/details', async (req, res) =>{
     const animalId = req.params.id;
+    const userId = req.user?.id;
     const animal = await animalService.getOneById(animalId);
+    const isOwner = animal.owner.equals(userId);
 
-    res.render('animals/details', {animal, pageTitle: 'Details Page'})
+    res.render('animals/details', {animal, isOwner, pageTitle: 'Details Page'})
 })
 
 export default animalController;
