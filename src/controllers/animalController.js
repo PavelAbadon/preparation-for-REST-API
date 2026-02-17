@@ -29,6 +29,13 @@ animalController.get('/', async(req, res) => {
 
     res.render('animals', { animals, pageTitle: 'Dashboard'});
 
+});
+
+animalController.get('/:id/details', async (req, res) =>{
+    const animalId = req.params.id;
+    const animal = await animalService.getOneById(animalId);
+
+    res.render('animals/details', {animal, pageTitle: 'Details Page'})
 })
 
 export default animalController;

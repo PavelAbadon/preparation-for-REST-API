@@ -12,4 +12,8 @@ export function createAnimal(animalData, userId) {
     return Animal.create({
         ...animalData, 
         owner: userId}
-    )}
+)}
+
+export function getOneById (animalId){
+    return Animal.findById(animalId);
+}
