@@ -69,26 +69,25 @@ animalController.get('/:id/delete', isAuth, async (req, res) => {
 
 animalController.get(`/:id/edit`, isAuth, async (req, res) =>{
     const animalId = req.params.id;
-    const animalData = await animalService.getOneById(animalId);
+    const animal = await animalService.getOneById(animalId);
     
 
-    res.render('animals/edit', { animalData, pageTitle: 'Edit animal' });
+    res.render('animals/edit', { animal, pageTitle: 'Edit animal' });
 
 })
 
-//animalController.post('/:id/edit', isAuth, async (req, res) =>{
-    //const animalId = req.params.id;
-   // const animalData = req.body;
-    //const userId = req.user.id;
+animalController.post('/:id/edit', isAuth, async (req, res) =>{
+    const animalId = req.params.id;
+    const animalData = req.body;
+    const userId = req.user.id;
 
-    //try {
-   //     await animalService.editAnimal(animalId, animalData);
- //       res.redirect(`/animals/${animalId}/details`, )
-    //} catch (err) {
-        
-   // }
+    try {
+        await animalService.editAnimal(animalId, animalData);
+        res.redirect(`/animals/${animalId}/details`, )
+    } catch (err) {
+        res.render('animals/edit', {animal: animalData, error: getErrorMessage(err)})        
+    }
 
-    
-//});
+});
 
 export default animalController;
