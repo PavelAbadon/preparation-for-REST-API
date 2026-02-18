@@ -48,6 +48,15 @@ animalController.get('/:id/donations', isAuth, async (req, res) => {
     await animalService.donate(animalId, userId);
 
     res.redirect(`/animals/${animalId}/details`);
+});
+
+animalController.get('/:id/delete', isAuth, async (req, res) => {
+    const animalId = req.params.id;
+    const userId = req.user.id;
+
+    await animalService.deleteAnimal(animalId);
+
+    res.redirect('/animals')
 })
 
 export default animalController;

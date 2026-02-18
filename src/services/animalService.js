@@ -15,9 +15,13 @@ export function createAnimal(animalData, userId) {
 )}
 
 export function getOneById (animalId){
-    return Animal.findById(animalId);
+    return Animal.findById(animalId).populate('donations');
 }
 
 export function donate (animalId, userId){
     return Animal.findByIdAndUpdate( animalId, { $push:{donations:userId} });
+}
+
+export function deleteAnimal(animalId, userId){
+    return Animal.findByIdAndDelete(animalId);
 }
