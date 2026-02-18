@@ -33,6 +33,10 @@ const animalSchema = new Schema({
         type: Types.ObjectId,
         ref: 'User', 
     },
+    donations:[{
+        type: Types.ObjectId,
+        ref: 'User',
+    }]
 });
 
 const Animal = model('Animal', animalSchema);

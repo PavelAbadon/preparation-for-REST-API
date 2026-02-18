@@ -37,10 +37,15 @@
                     <div id="action-buttons">
                         <a href="#" id="edit-btn">Edit</a>
                         <a href="#" id="delete-btn">Delete</a>
-                    {{/if}}
-                        <!--<a href="#" id="donation-btn">Donation</a>
-                        <p id="already-donated">You already donated!</p>-->
+                    </div>    
+                    {{else}}
+                    <div id="action-buttons">
+                        <a href="/animals/{{animal.id}}/donations" id="donation-btn">Donation</a>
+                        <p id="already-donated">You already donated!</p>
                     </div>
+                    {{/if}}
+                        
+                    
                     {{/if}}
                 </div>
             </section>

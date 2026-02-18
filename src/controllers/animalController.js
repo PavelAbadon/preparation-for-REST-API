@@ -38,6 +38,15 @@ animalController.get('/:id/details', async (req, res) =>{
     const isOwner = animal.owner.equals(userId);
 
     res.render('animals/details', {animal, isOwner, pageTitle: 'Details Page'})
+});
+
+animalController.get('/:id/donations', isAuth, async (req, res) => {
+    const animalId = req.params.id;
+    const userId = req.user.id;
+
+    await animalService.donate(animalId, userId);
+
+    res.redirect(`/animals/${animalId}/details`);
 })
 
 export default animalController;
