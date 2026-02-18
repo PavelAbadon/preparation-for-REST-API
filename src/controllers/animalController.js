@@ -69,9 +69,10 @@ animalController.get('/:id/delete', isAuth, async (req, res) => {
 
 animalController.get(`/:id/edit`, isAuth, async (req, res) =>{
     const animalId = req.params.id;
-    const animalData = req.body;
+    const animalData = await animalService.getOneById(animalId);
+    
 
-    res.render('animals/edit', { pageTitle: 'Edit animal' });
+    res.render('animals/edit', { animalData, pageTitle: 'Edit animal' });
 
 })
 
