@@ -5,6 +5,8 @@ import { getErrorMessage } from "../utils/errorUtils.js";
 
 const animalController = Router();
 
+//Create Animal Functionality - 1st Render CREATE view 
+//2nd POST new Data - new Animal
 animalController.get('/create', isAuth, async (req, res) => {
     res.render('animals/create', { pageTitle: 'Add animal' });
 });
@@ -24,6 +26,7 @@ animalController.post('/create', isAuth, async (req, res) => {
     }
 });
 
+//Get ALL - for Dashbord
 animalController.get('/', async(req, res) => {
     const animals = await animalService.getAllAnimals();
 
@@ -31,6 +34,7 @@ animalController.get('/', async(req, res) => {
 
 });
 
+// Get ONE - for Details
 animalController.get('/:id/details', async (req, res) =>{
     const animalId = req.params.id;
     const userId = req.user?.id;
@@ -41,6 +45,7 @@ animalController.get('/:id/details', async (req, res) =>{
     res.render('animals/details', {animal, isOwner, isDonated, pageTitle: 'Details Page'})
 });
 
+// Donation Logic
 animalController.get('/:id/donations', isAuth, async (req, res) => {
     const animalId = req.params.id;
     const userId = req.user.id;
@@ -50,6 +55,7 @@ animalController.get('/:id/donations', isAuth, async (req, res) => {
     res.redirect(`/animals/${animalId}/details`);
 });
 
+//Delete Logic
 animalController.get('/:id/delete', isAuth, async (req, res) => {
     const animalId = req.params.id;
     const userId = req.user.id;
@@ -57,6 +63,31 @@ animalController.get('/:id/delete', isAuth, async (req, res) => {
     await animalService.deleteAnimal(animalId);
 
     res.redirect('/animals')
+});
+
+//Edit Animal Functionality - 1st Render edit view
+
+animalController.get(`/:id/edit`, isAuth, async (req, res) =>{
+    const animalId = req.params.id;
+    const animalData = req.body;
+
+    res.render('animals/edit', { pageTitle: 'Edit animal' });
+
 })
+
+//animalController.post('/:id/edit', isAuth, async (req, res) =>{
+    //const animalId = req.params.id;
+   // const animalData = req.body;
+    //const userId = req.user.id;
+
+    //try {
+   //     await animalService.editAnimal(animalId, animalData);
+ //       res.redirect(`/animals/${animalId}/details`, )
+    //} catch (err) {
+        
+   // }
+
+    
+//});
 
 export default animalController;

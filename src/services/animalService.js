@@ -25,3 +25,8 @@ export function donate (animalId, userId){
 export function deleteAnimal(animalId, userId){
     return Animal.findByIdAndDelete(animalId);
 }
+
+export function editAnimal(animalId, animalData, userId){
+    return Animal.findByIdAndUpdate(animalId, animalData, {runValidators:true});
+
+}
