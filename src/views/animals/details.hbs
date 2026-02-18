@@ -40,8 +40,11 @@
                     </div>    
                     {{else}}
                     <div id="action-buttons">
-                        <a href="/animals/{{animal.id}}/donations" id="donation-btn">Donation</a>
-                        <p id="already-donated">You already donated!</p>
+                        {{#if isDonated}}
+                            <p id="already-donated">You already donated!</p>
+                        {{else}}
+                            <a href="/animals/{{animal.id}}/donations" id="donation-btn">Donation</a>
+                        {{/if}}
                     </div>
                     {{/if}}
                         

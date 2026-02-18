@@ -36,8 +36,9 @@ animalController.get('/:id/details', async (req, res) =>{
     const userId = req.user?.id;
     const animal = await animalService.getOneById(animalId);
     const isOwner = animal.owner.equals(userId);
+    const isDonated = animal.donations.some(donation => donation.equals(userId));
 
-    res.render('animals/details', {animal, isOwner, pageTitle: 'Details Page'})
+    res.render('animals/details', {animal, isOwner, isDonated, pageTitle: 'Details Page'})
 });
 
 animalController.get('/:id/donations', isAuth, async (req, res) => {
